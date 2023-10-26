@@ -1,6 +1,12 @@
 package com.viimeiset.koiranvaatekauppa.domain;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Tuote {
@@ -9,7 +15,7 @@ public class Tuote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tyyppi;
-    private String väri;
+    private String vari;
     private String koko;
     private double hinta;
 
@@ -21,12 +27,12 @@ public class Tuote {
 
     }
 
-    public Tuote(String tyyppi, String väri, String koko, double hinta, Valmistaja Valmistaja) {
+    public Tuote(String tyyppi, String vari, String koko, double hinta, Valmistaja valmistaja) {
         this.tyyppi = tyyppi;
-        this.väri = väri;
+        this.vari = vari;
         this.koko = koko;
         this.hinta = hinta;
-        this.valmistaja = Valmistaja;
+        this.valmistaja = valmistaja;
     }
 
     public Long getId() {
@@ -42,12 +48,12 @@ public class Tuote {
         this.tyyppi = tyyppi;
     }
 
-    public String getVäri() {
-        return this.väri;
+    public String getVari() {
+        return this.vari;
     }
 
-    public void setVäri(String väri) {
-        this.väri = väri;
+    public void setVari(String vari) {
+        this.vari = vari;
     }
 
     public String getKoko() {

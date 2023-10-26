@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Koiranvaatekauppa</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+       <h2>Tuotelista</h2> 
+
+       <table>
+        <tr>
+        <th>tyyppi</th>
+        <th>väri</th>
+        <th>koko</th>
+        <th>hinta</th> 
+        <th>valmistaja</th>
+        <th>delete</th>
+        </tr>
+
+        <tr th:each = "tuote : ${tuotteet}">
+            <td th:text="${tuote.tyyppi}"></td>
+            <td th:text="${tuote.vari}"></td>
+            <td th:text="${tuote.koko}"></td>
+            <td th:text="${tuote.hinta}"></td>
+            <td th:text="${tuote.valmistaja.nimi}"></td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${tuote.id})}">Edit</a> 
+            </td>
+
+            <td>
+                <a th:href="@{/delete/{id}(id=${tuote.id})}">Delete</a> 
+            </td>
+
+        </tr>
+        </table>
+       
+    </body>
+
+</html>

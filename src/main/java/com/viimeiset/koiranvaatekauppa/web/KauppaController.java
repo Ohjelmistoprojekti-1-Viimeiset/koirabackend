@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
-import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
+//import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class KauppaController {
 @Autowired
 	private TuoteRepository repository; 
-    private ValmistajaRepository valmistajaRepository;
+    //private ValmistajaRepository valmistajaRepository;
 
 
     @GetMapping(value= {"/tuotelista"})
@@ -27,11 +28,11 @@ public class KauppaController {
         return "tuotelista";
     }
 
-    @RequestMapping(value = "/lisää")
+    @RequestMapping(value = "/lisaa")
 	public String addTuote(Model model){
 	model.addAttribute("tuote"
 	, new Tuote());
-	return "//-";}
+	return "lisaa";}
 
     @PostMapping(value = "/tallenna")
 	public String save(Tuote tuote){
@@ -39,10 +40,11 @@ public class KauppaController {
 	return "redirect:tuotelista";
 	}
 
-    @GetMapping(value="/delete/{id}")
-    public String deleteTuote(@PathVariable Long Id) {
-        return "redirect:/tuotelista";
-    }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteTuote(@PathVariable("id") Long tuoteId, Model model) {
+	repository.deleteById(tuoteId);
+	return "redirect:/tuotelista";
+	}
     
     //@RequestMapping(value = "/edit/{id}")
 	//public String editBook(@PathVariable("id") Long bookId, Model model){
