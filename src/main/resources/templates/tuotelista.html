@@ -1,40 +1,39 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Koiranvaatekauppa</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-       <h2>Tuotelista</h2> 
+<head>
+<title>Koiranvaatekauppa</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>Tuotelista</h2>
 
-       <table>
-        <tr>
-        <th>tyyppi</th>
-        <th>väri</th>
-        <th>koko</th>
-        <th>hinta</th> 
-        <th>valmistaja</th>
-        <th>delete</th>
-        </tr>
+	<form action="/lisaa" method="get">
+		<button type="submit">ADD</button>
+	</form>
 
-        <tr th:each = "tuote : ${tuotteet}">
-            <td th:text="${tuote.tyyppi}"></td>
-            <td th:text="${tuote.vari}"></td>
-            <td th:text="${tuote.koko}"></td>
-            <td th:text="${tuote.hinta}"></td>
-            <td th:text="${tuote.valmistaja.nimi}"></td>
-            <td>
-                <a th:href="@{/edit/{id}(id=${tuote.id})}">Edit</a> 
-            </td>
+	<table>
+		<tr>
+			<th>tyyppi</th>
+			<th>väri</th>
+			<th>koko</th>
+			<th>hinta</th>
+			<th>valmistaja</th>
+			<th>edit</th>
+			<th>delete</th>
+		</tr>
 
-            <td>
-                <a th:href="@{/delete/{id}(id=${tuote.id})}">Delete</a> 
-            </td>
+		<tr th:each="tuote : ${tuotteet}">
+			<td th:text="${tuote.tyyppi}"></td>
+			<td th:text="${tuote.vari}"></td>
+			<td th:text="${tuote.koko}"></td>
+			<td th:text="${tuote.hinta}"></td>
+			<td
+				th:text="${tuote.valmistaja != null ? tuote.valmistaja.nimi : 'N/A'}"></td>
+			<td><a th:href="@{/muokkaa/{id}(id=${tuote.id})}">Edit</a></td>
 
-        </tr>
-        </table>
-       
-    </body>
-
+			<td><a th:href="@{/delete/{id}(id=${tuote.id})}">Delete</a></td>
+		</tr>
+	</table>
+</body>
 </html>

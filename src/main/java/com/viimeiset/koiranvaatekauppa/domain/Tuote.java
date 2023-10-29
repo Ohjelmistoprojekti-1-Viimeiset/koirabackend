@@ -1,6 +1,5 @@
 package com.viimeiset.koiranvaatekauppa.domain;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +20,7 @@ public class Tuote {
 
     @ManyToOne
     @JoinColumn(name = "valmistaja_id")
-    public Valmistaja valmistaja;
+    private Valmistaja valmistaja;
 
     public Tuote() {
 
@@ -38,7 +37,6 @@ public class Tuote {
     public Long getId() {
         return this.id;
     }
-
 
     public String getTyyppi() {
         return this.tyyppi;
@@ -74,6 +72,10 @@ public class Tuote {
 
     public Valmistaja getValmistaja() {
         return valmistaja;
+    }
+
+    public void setValmistaja(Valmistaja valmistaja) {
+        this.valmistaja = valmistaja;
     }
 
 }
