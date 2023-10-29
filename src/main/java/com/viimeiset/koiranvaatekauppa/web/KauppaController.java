@@ -39,6 +39,12 @@ public class KauppaController {
 		return "tuotelista";
 	}
 
+	@GetMapping(value = { "/valmistajalista" })
+	public String valmistajaLista(Model model) {
+		model.addAttribute("valmistajat", valmistajaRepository.findAll());
+		return "valmistajalista";
+	}
+	
 	@GetMapping(value = "/lisaa")
 	public String addTuote(Model model) {
 		model.addAttribute("tuote", new Tuote());

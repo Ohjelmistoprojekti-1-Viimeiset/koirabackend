@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Koiranvaatekauppa</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h2>Valmistajat</h2>
+	<table>
+		<tr>
+		<th>Nimi</th>
+		</tr>
+        <tr th:each="valmistaja : ${valmistajat}">
+	    <td th:text="${valmistaja.nimi}"></td>
+	</table>
+	<a href="/tuotelista">Takaisin tuotelistaan</a>
+</body>
+</html>

@@ -9,30 +9,33 @@
 	<h2>Tuotelista</h2>
 
 	<form action="/lisaa" method="get">
-		<button type="submit">ADD</button>
+	<button type="submit">Lisää tuote</button>
 	</form>
+	
+	<form action="/valmistajalista" method="get">
+    <button type="submit">Tarkastele valmistajia</button>
+    </form>
+	
 
 	<table>
 		<tr>
-			<th>tyyppi</th>
-			<th>väri</th>
-			<th>koko</th>
-			<th>hinta</th>
-			<th>valmistaja</th>
-			<th>edit</th>
-			<th>delete</th>
+			<th>Tyyppi</th>
+			<th>Väri</th>
+			<th>Koko</th>
+			<th>Hinta</th>
+			<th>Valmistaja</th>
 		</tr>
 
 		<tr th:each="tuote : ${tuotteet}">
 			<td th:text="${tuote.tyyppi}"></td>
 			<td th:text="${tuote.vari}"></td>
 			<td th:text="${tuote.koko}"></td>
-			<td th:text="${tuote.hinta}"></td>
+			<td th:text="${tuote.hinta}+€"></td>
 			<td
 				th:text="${tuote.valmistaja != null ? tuote.valmistaja.nimi : 'N/A'}"></td>
-			<td><a th:href="@{/muokkaa/{id}(id=${tuote.id})}">Edit</a></td>
+			<td><a th:href="@{/muokkaa/{id}(id=${tuote.id})}">Muokkaa</a></td>
 
-			<td><a th:href="@{/delete/{id}(id=${tuote.id})}">Delete</a></td>
+			<td><a th:href="@{/delete/{id}(id=${tuote.id})}">Poista</a></td>
 		</tr>
 	</table>
 </body>
