@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
+import com.viimeiset.koiranvaatekauppa.domain.AppUser;
+import com.viimeiset.koiranvaatekauppa.domain.AppUserRepository;
 import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
 import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
@@ -25,7 +27,7 @@ public class KoiranvaatekauppaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner dataLoader(TuoteRepository tuoteRepository, ValmistajaRepository valmistajaRepository) {
+	public CommandLineRunner dataLoader(TuoteRepository tuoteRepository, ValmistajaRepository valmistajaRepository, AppUserRepository uRepository) {
 		return (args) -> {
 			log.info("Tallennetaan tuote ja valmistajatiedot");
 
@@ -38,6 +40,11 @@ public class KoiranvaatekauppaApplication {
 			Tuote tuote2 = new Tuote("Kengät", "Sininen", "L", 59.99, valmistaja2);
 			Tuote tuote3 = new Tuote("Liivi", "Punainen", "S", 14.99, valmistaja3);
 			tuoteRepository.saveAll(Arrays.asList(tuote1, tuote2, tuote3));
+			
+			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "ROLE_USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ROLE_ADMIN");
+			uRepository.save(user1);
+			uRepository.save(user2);
 
 			log.info("Lisätään kaikki data.");
 			for (Tuote tuote : tuoteRepository.findAll()) {

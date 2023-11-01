@@ -3,12 +3,16 @@ package com.viimeiset.koiranvaatekauppa.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
 import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
+
+import jakarta.validation.Valid;
+
 import com.viimeiset.koiranvaatekauppa.domain.TuoteService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
 import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.viimeiset.koiranvaatekauppa.domain.SignupForm;
 
 @Controller
 public class KauppaController {
@@ -32,6 +37,20 @@ public class KauppaController {
 
 	@Autowired
 	private TuoteService tuoteService;
+	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
+	
+	@PostMapping("/signup")
+	public String signup(@Valid SignupForm signupForm, BindingResult bindingResult) {
+	    if (bindingResult.hasErrors()) {
+	        return "signup";
+	    }
+	    return "redirect:/success";
+	}
+	
 
 	@GetMapping(value = { "/tuotelista" })
 	public String tuoteLista(Model model) {
