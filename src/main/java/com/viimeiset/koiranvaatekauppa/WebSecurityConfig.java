@@ -38,9 +38,10 @@ public class WebSecurityConfig  {
 				
 				
 				.requestMatchers(antMatcher("/h2-console/**")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/lisaa")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/muokkaa")).hasRole("ADMIN")
-				
+				.requestMatchers(antMatcher("/lisaa/**")).hasRole("ADMIN")
+				.requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
+				.requestMatchers(antMatcher("/delete/{id}")).hasRole("ADMIN")
+				.requestMatchers(antMatcher("/deleteValmistaja/{id}")).hasRole("ADMIN")
 				.anyRequest().authenticated()
 				
 		)
@@ -58,6 +59,8 @@ public class WebSecurityConfig  {
 		.logout(logout -> logout
 				.permitAll()
 		);
+		
+		http.csrf().disable();
 				
 		return http.build();
 	}

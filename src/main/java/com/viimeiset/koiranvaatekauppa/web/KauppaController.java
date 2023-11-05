@@ -90,6 +90,14 @@ public class KauppaController {
 		return "redirect:/tuotelista";
 	}
 
+	//Valmistajan poisto
+	@RequestMapping(value = "/deleteValmistaja/{id}", method = RequestMethod.GET)
+	public String deleteValmistaja(@PathVariable("id") Long valmistajaId, Model model) {
+		valmistajaRepository.deleteById(valmistajaId);
+	    return "redirect:/valmistajalista";
+	}
+	
+	
 	@GetMapping(value = "/muokkaa/{id}")
 	public String editBook(@PathVariable("id") Long tuoteId, Model model) {
 		Tuote tuote = repository.findById(tuoteId).orElse(null);
