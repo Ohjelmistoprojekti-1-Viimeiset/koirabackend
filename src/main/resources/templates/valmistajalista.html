@@ -20,7 +20,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
             </td>
         </tr>
     </table>
-    <a href="/tuotelista">Takaisin tuotelistaan</a>
+  
 
     <!-- Vahvistusikkuna valmistajan poistolle -->
     <div  id="confirmDelete" style="display: none;">
@@ -40,6 +40,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 		<button>Kirjaudu sisään</button>
 	</a>
 </div>
+<div><form action="/tuotelista" method="get">
+      <button type="submit">Tuotelista</button>
+    </form></div>
 <div sec:authorize="isAuthenticated()">
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Kirjaudu ulos" />
