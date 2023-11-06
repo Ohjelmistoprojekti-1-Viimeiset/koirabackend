@@ -13,5 +13,12 @@
     <form action="/valmistajalista" method="get">
       <button type="submit">Valmistajalista</button>
     </form>
+    <a href="http://localhost:8080/login">
+		<button>Kirjaudu sisään</button>
+	</a>
+
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos" />
+	</form>
   </body>
 </html>

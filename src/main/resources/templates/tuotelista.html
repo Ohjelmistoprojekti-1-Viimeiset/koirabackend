@@ -9,13 +9,14 @@
 	<h2>Tuotelista</h2>
 
 	<form action="/lisaa" method="get">
-	<button th:if="${#authorization.expression('hasRole(''ADMIN'')')}" type="submit">Lisää tuote</button>
+		<button th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+			type="submit">Lisää tuote</button>
 	</form>
-	
+
 	<form action="/valmistajalista" method="get">
-    <button type="submit">Tarkastele valmistajia</button>
-    </form>
-	
+		<button type="submit">Tarkastele valmistajia</button>
+	</form>
+
 
 	<table>
 		<tr>
@@ -33,10 +34,18 @@
 			<td th:text="${tuote.hinta}+€"></td>
 			<td
 				th:text="${tuote.valmistaja != null ? tuote.valmistaja.nimi : 'N/A'}"></td>
-			<td><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/muokkaa/{id}(id=${tuote.id})}">Muokkaa</a></td>
+			<td><a
+				th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+				th:href="@{/muokkaa/{id}(id=${tuote.id})}">Muokkaa</a></td>
 
-			<td><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/delete/{id}(id=${tuote.id})}">Poista</a></td>
+			<td><a
+				th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+				th:href="@{/delete/{id}(id=${tuote.id})}">Poista</a></td>
 		</tr>
 	</table>
+
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos" />
+	</form>
 </body>
 </html>

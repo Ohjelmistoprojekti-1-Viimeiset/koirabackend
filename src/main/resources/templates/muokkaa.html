@@ -28,4 +28,7 @@
 
     <a href="/tuotelista">Takaisin tuotelistaan</a>
   </body>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos" />
+	</form>
 </html>

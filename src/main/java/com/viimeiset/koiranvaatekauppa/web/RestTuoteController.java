@@ -3,7 +3,7 @@ package com.viimeiset.koiranvaatekauppa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
@@ -12,6 +12,7 @@ import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
 import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 
 @RestController
+@RequestMapping("/api")
 public class RestTuoteController {
 	
 	
@@ -41,8 +42,5 @@ public class RestTuoteController {
 		return repository.findByTyyppi("Takki");
 		
 	}
-	
-	
-	
 
 }

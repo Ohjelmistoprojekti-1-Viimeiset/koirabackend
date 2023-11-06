@@ -28,6 +28,12 @@
         <button><a th:href="@{/deleteValmistaja/{id}(id=${valmistajaId})}" class="btn btn-danger" id="confirmDeleteButton">Kyllä, poista</a></button>
         <button><a href="#" id="cancelDeleteButton" class="btn">Peruuta</a></button>
     </div>
+    
+    <br>
+
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos" />
+	</form>
 
     <script type="text/javascript">
         // JS-koodi vahvistusikkunalle
