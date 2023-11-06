@@ -37,20 +37,24 @@ public class KauppaController {
 
 	@Autowired
 	private TuoteService tuoteService;
-	
-	@RequestMapping(value="/login")
-    public String login() {	
-        return "login";
-    }
-	
+
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
+	}
+
 	@PostMapping("/signup")
 	public String signup(@Valid SignupForm signupForm, BindingResult bindingResult) {
-	    if (bindingResult.hasErrors()) {
-	        return "signup";
-	    }
-	    return "redirect:/success";
+		if (bindingResult.hasErrors()) {
+			return "signup";
+		}
+		return "redirect:/success";
 	}
-	
+
+	@GetMapping(value = { "/index" })
+	public String index() {
+		return "index";
+	}
 
 	@GetMapping(value = { "/tuotelista" })
 	public String tuoteLista(Model model) {
@@ -63,7 +67,7 @@ public class KauppaController {
 		model.addAttribute("valmistajat", valmistajaRepository.findAll());
 		return "valmistajalista";
 	}
-	
+
 	@GetMapping(value = "/lisaa")
 	public String addTuote(Model model) {
 		model.addAttribute("tuote", new Tuote());
@@ -90,14 +94,13 @@ public class KauppaController {
 		return "redirect:/tuotelista";
 	}
 
-	//Valmistajan poisto
+	// Valmistajan poisto
 	@RequestMapping(value = "/deleteValmistaja/{id}", method = RequestMethod.GET)
 	public String deleteValmistaja(@PathVariable("id") Long valmistajaId, Model model) {
 		valmistajaRepository.deleteById(valmistajaId);
-	    return "redirect:/valmistajalista";
+		return "redirect:/valmistajalista";
 	}
-	
-	
+
 	@GetMapping(value = "/muokkaa/{id}")
 	public String editBook(@PathVariable("id") Long tuoteId, Model model) {
 		Tuote tuote = repository.findById(tuoteId).orElse(null);

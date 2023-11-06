@@ -1,6 +1,5 @@
 package com.viimeiset.koiranvaatekauppa;
 
-
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.viimeiset.koiranvaatekauppa.web.UserDetailServiceImpl;
 
-
-
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-public class WebSecurityConfig  {
+public class WebSecurityConfig {
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
-	
-	
+
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		
@@ -35,6 +31,8 @@ public class WebSecurityConfig  {
 				.requestMatchers(antMatcher("/saveuser")).permitAll()
 				.requestMatchers(antMatcher("/tuotelista")).permitAll()
 				.requestMatchers(antMatcher("/valmistajalista")).permitAll()
+				.requestMatchers(antMatcher("/index")).permitAll()
+
 				
 				
 				.requestMatchers(antMatcher("/h2-console/**")).hasRole("ADMIN")
@@ -64,10 +62,9 @@ public class WebSecurityConfig  {
 				
 		return http.build();
 	}
-	
-
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-	}}
+	}
+}
