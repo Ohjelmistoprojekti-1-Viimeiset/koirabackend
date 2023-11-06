@@ -43,6 +43,10 @@
 				th:href="@{/delete/{id}(id=${tuote.id})}">Poista</a></td>
 		</tr>
 	</table>
+	
+	<a href="http://localhost:8080/index">
+		<button>Etusivulle</button>
+	</a>
 
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Kirjaudu ulos" />
