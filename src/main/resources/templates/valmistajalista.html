@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Koiranvaatekauppa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -34,9 +35,16 @@
 		<button>Etusivulle</button>
 	</a>
 
+	<div sec:authorize="!isAuthenticated()">
+    <a href="http://localhost:8080/login">
+		<button>Kirjaudu sisään</button>
+	</a>
+</div>
+<div sec:authorize="isAuthenticated()">
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Kirjaudu ulos" />
 	</form>
+	</div>
 
     <script type="text/javascript">
         // JS-koodi vahvistusikkunalle
