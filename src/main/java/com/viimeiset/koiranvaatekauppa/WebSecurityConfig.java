@@ -51,14 +51,13 @@ public class WebSecurityConfig {
 		)
 		.formLogin(formlogin -> formlogin
 				.loginPage("/login")
-				.defaultSuccessUrl("/tuotelista", true)
+				.defaultSuccessUrl("/index", true)
 				.permitAll()
 		)
 		.logout(logout -> logout
-				.permitAll()
-		);
+				.permitAll())
 		
-		http.csrf().disable();
+		.csrf(csrf -> csrf.disable());
 				
 		return http.build();
 	}
