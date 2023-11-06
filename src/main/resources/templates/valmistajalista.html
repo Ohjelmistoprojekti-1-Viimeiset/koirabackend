@@ -14,7 +14,7 @@
         <tr th:each="valmistaja : ${valmistajat}">
             <td th:text="${valmistaja.nimi}"></td>
             <td>
-                <a href="#" th:attr="data-valmistajaId=${valmistaja.id},data-tuotteita=${valmistaja.tuotteet.size()}" class="delete-button">Poista</a>
+                <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#" th:attr="data-valmistajaId=${valmistaja.id},data-tuotteita=${valmistaja.tuotteet.size()}" class="delete-button">Poista</a>
                 <!--  th:if="${#authorization.expression('hasRole(''ADMIN'')')}"-->
             </td>
         </tr>
