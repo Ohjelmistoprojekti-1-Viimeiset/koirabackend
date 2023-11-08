@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import java.util.Arrays;
 
 import com.viimeiset.koiranvaatekauppa.web.UserDetailServiceImpl;
 
@@ -21,45 +23,47 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		
-		http
-		.authorizeHttpRequests(authorize -> authorize
-				
-				
-				.requestMatchers(antMatcher("/css/**")).permitAll()
-				.requestMatchers(antMatcher("/signup")).permitAll()
-				.requestMatchers(antMatcher("/saveuser")).permitAll()
-				.requestMatchers(antMatcher("/tuotelista")).permitAll()
-				.requestMatchers(antMatcher("/valmistajalista")).permitAll()
-				.requestMatchers(antMatcher("/index")).permitAll()
 
-				
-				
-				.requestMatchers(antMatcher("/h2-console/**")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/lisaa/**")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/delete/{id}")).hasRole("ADMIN")
-				.requestMatchers(antMatcher("/deleteValmistaja/{id}")).hasRole("ADMIN")
-				.anyRequest().authenticated()
-				
-		)
-		
-		.headers(headers -> headers
-				.frameOptions(frameoptions -> 
-				frameoptions.disable()
-			    )
-		)
-		.formLogin(formlogin -> formlogin
-				.loginPage("/login")
-				.defaultSuccessUrl("/index", true)
-				.permitAll()
-		)
-		.logout(logout -> logout
-				.logoutSuccessUrl("/index")
-				.permitAll())
-		
-		.csrf(csrf -> csrf.disable());
-				
+		http
+				.cors(cors -> cors.configurationSource(request -> {
+					CorsConfiguration config = new CorsConfiguration();
+					config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+					config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+					config.setAllowedHeaders(Arrays.asList("*"));
+					config.setAllowCredentials(true);
+					return config;
+				}))
+				.authorizeHttpRequests(authorize -> authorize
+
+						.requestMatchers(antMatcher("/css/**")).permitAll()
+						.requestMatchers(antMatcher("/signup")).permitAll()
+						.requestMatchers(antMatcher("/saveuser")).permitAll()
+						.requestMatchers(antMatcher("/tuotelista")).permitAll()
+						.requestMatchers(antMatcher("/valmistajalista")).permitAll()
+						.requestMatchers(antMatcher("/index")).permitAll()
+
+						.requestMatchers(antMatcher("/h2-console/**")).hasRole("ADMIN")
+						.requestMatchers(antMatcher("/lisaa/**")).hasRole("ADMIN")
+						.requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
+						.requestMatchers(antMatcher("/delete/{id}")).hasRole("ADMIN")
+						.requestMatchers(antMatcher("/deleteValmistaja/{id}")).hasRole("ADMIN")
+						.requestMatchers(antMatcher("/api/**")).authenticated()
+						.anyRequest().authenticated()
+
+				)
+
+				.headers(headers -> headers
+						.frameOptions(frameoptions -> frameoptions.disable()))
+				.formLogin(formlogin -> formlogin
+						.loginPage("/login")
+						.defaultSuccessUrl("/index", true)
+						.permitAll())
+				.logout(logout -> logout
+						.logoutSuccessUrl("/index")
+						.permitAll())
+
+				.csrf(csrf -> csrf.disable());
+
 		return http.build();
 	}
 
