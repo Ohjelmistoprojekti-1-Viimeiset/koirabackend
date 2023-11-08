@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import java.util.Arrays;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.viimeiset.koiranvaatekauppa.web.UserDetailServiceImpl;
 
@@ -22,17 +24,22 @@ public class WebSecurityConfig {
 	private UserDetailServiceImpl userDetailsService;
 
 	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedHeaders(Arrays.asList("*"));
+		configuration.setAllowCredentials(true);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+
+	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
 		http
-				.cors(cors -> cors.configurationSource(request -> {
-					CorsConfiguration config = new CorsConfiguration();
-					config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-					config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-					config.setAllowedHeaders(Arrays.asList("*"));
-					config.setAllowCredentials(true);
-					return config;
-				}))
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.authorizeHttpRequests(authorize -> authorize
 
 						.requestMatchers(antMatcher("/css/**")).permitAll()
@@ -47,7 +54,7 @@ public class WebSecurityConfig {
 						.requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
 						.requestMatchers(antMatcher("/delete/{id}")).hasRole("ADMIN")
 						.requestMatchers(antMatcher("/deleteValmistaja/{id}")).hasRole("ADMIN")
-						.requestMatchers(antMatcher("/api/**")).authenticated()
+						.requestMatchers(antMatcher("/api/**")).permitAll()
 						.anyRequest().authenticated()
 
 				)

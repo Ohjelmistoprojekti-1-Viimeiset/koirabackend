@@ -1,6 +1,5 @@
 package com.viimeiset.koiranvaatekauppa.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,33 +13,35 @@ import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 @RestController
 @RequestMapping("/api")
 public class RestTuoteController {
-	
-	
-	// injektoi TuoteRepossitoryn 
+
+	// injektoi TuoteRepossitoryn
 	@Autowired
 	TuoteRepository repository;
-	
+
 	// injektoi ValmistajaRepossitoryn
 	@Autowired
 	ValmistajaRepository valmistajaRepository;
-	
-	
-	//GET pyyntö jolla haetaan tietokannasta kaikki tuotteet 
+
+	// GET pyyntö jolla haetaan tietokannasta kaikki tuotteet
 	@GetMapping("/tuotteet")
-	public Iterable<Tuote> getTuotteet(){
+
+	public Iterable<Tuote> getTuotteet() {
 		return repository.findAll();
 	}
-	//GET pyyntö jolla haetaan tietokannasta kaikki valmistajat
+
+	// GET pyyntö jolla haetaan tietokannasta kaikki valmistajat
 	@GetMapping("/valmistajat")
-	public Iterable<Valmistaja> getValmistajat(){
+
+	public Iterable<Valmistaja> getValmistajat() {
 		return valmistajaRepository.findAll();
 	}
-	//GET pyyntö jolla haetaan tietokannasta kaikki takit.
-	
+	// GET pyyntö jolla haetaan tietokannasta kaikki takit.
+
 	@GetMapping("/tuotteet/{tyyppi}")
-	public Iterable<Tuote> getTakit(){
+
+	public Iterable<Tuote> getTakit() {
 		return repository.findByTyyppi("Takki");
-		
+
 	}
 
 }
