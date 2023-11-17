@@ -16,6 +16,8 @@ import com.viimeiset.koiranvaatekauppa.domain.AppUserRepository;
 import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
 import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
+import com.viimeiset.koiranvaatekauppa.domain.Tyyppi;
+import com.viimeiset.koiranvaatekauppa.domain.Koko;
 
 @SpringBootApplication
 public class KoiranvaatekauppaApplication {
@@ -27,7 +29,8 @@ public class KoiranvaatekauppaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner dataLoader(TuoteRepository tuoteRepository, ValmistajaRepository valmistajaRepository, AppUserRepository uRepository) {
+	public CommandLineRunner dataLoader(TuoteRepository tuoteRepository, ValmistajaRepository valmistajaRepository,
+			AppUserRepository uRepository) {
 		return (args) -> {
 			log.info("Tallennetaan tuote ja valmistajatiedot");
 
@@ -36,17 +39,19 @@ public class KoiranvaatekauppaApplication {
 			Valmistaja valmistaja3 = new Valmistaja("Puma");
 			valmistajaRepository.saveAll(Arrays.asList(valmistaja1, valmistaja2, valmistaja3));
 
-			Tuote tuote1 = new Tuote("Takki", "Musta", "M", 29.99, valmistaja1);
-			Tuote tuote2 = new Tuote("Kengät", "Sininen", "L", 59.99, valmistaja2);
-			Tuote tuote3 = new Tuote("Liivi", "Punainen", "S", 14.99, valmistaja3);
-			Tuote tuote4 = new Tuote("Takki", "Punainen", "L", 39.99, valmistaja1);
-			Tuote tuote5 = new Tuote("Kengät", "Vihreä", "s", 89.99, valmistaja2);
-			Tuote tuote6 = new Tuote("Liivi", "Musta", "S", 9.99, valmistaja3);
+			Tuote tuote1 = new Tuote("Takki", Tyyppi.VAATE, "Musta", Koko.M, 29.99, valmistaja1);
+			Tuote tuote2 = new Tuote("Rukkanen", Tyyppi.VAATE, "Sininen", Koko.L, 59.99, valmistaja2);
+			Tuote tuote3 = new Tuote("Koiranruoka", Tyyppi.RUOKA, "Punainen", Koko.S, 14.99, valmistaja3);
+			Tuote tuote4 = new Tuote("Koiralelu", Tyyppi.LELU, "Punainen", Koko.L, 39.99, valmistaja1);
+			Tuote tuote5 = new Tuote("Hattu", Tyyppi.VAATE, "Vihreä", Koko.S, 89.99, valmistaja2);
+			Tuote tuote6 = new Tuote("Pipo", Tyyppi.VAATE, "Musta", Koko.S, 9.99, valmistaja3);
 			tuoteRepository.saveAll(Arrays.asList(tuote1, tuote2, tuote3, tuote4, tuote5,
 					tuote6));
-			
-			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "ROLE_USER");
-			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ROLE_ADMIN");
+
+			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6",
+					"ROLE_USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C",
+					"ROLE_ADMIN");
 			uRepository.save(user1);
 			uRepository.save(user2);
 

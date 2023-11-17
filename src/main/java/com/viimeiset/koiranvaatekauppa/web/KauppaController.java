@@ -112,6 +112,7 @@ public class KauppaController {
 	public String updateTuote(@PathVariable("id") Long tuoteId, Tuote tuote, Model model) {
 		Tuote existingTuote = repository.findById(tuoteId).orElse(null);
 
+		existingTuote.setTuoteNimi(tuote.getTuoteNimi());
 		existingTuote.setTyyppi(tuote.getTyyppi());
 		existingTuote.setVari(tuote.getVari());
 		existingTuote.setKoko(tuote.getKoko());

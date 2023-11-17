@@ -13,9 +13,10 @@ public class Tuote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tyyppi;
+    private String tuoteNimi;
+    private Tyyppi tyyppi;
     private String vari;
-    private String koko;
+    private Koko koko;
     private double hinta;
 
     @ManyToOne
@@ -26,7 +27,8 @@ public class Tuote {
 
     }
 
-    public Tuote(String tyyppi, String vari, String koko, double hinta, Valmistaja valmistaja) {
+    public Tuote(String tuoteNimi, Tyyppi tyyppi, String vari, Koko koko, double hinta, Valmistaja valmistaja) {
+        this.tuoteNimi = tuoteNimi;
         this.tyyppi = tyyppi;
         this.vari = vari;
         this.koko = koko;
@@ -38,11 +40,19 @@ public class Tuote {
         return this.id;
     }
 
-    public String getTyyppi() {
+    public String getTuoteNimi() {
+        return this.tuoteNimi;
+    }
+
+    public void setTuoteNimi(String tuoteNimi) {
+        this.tuoteNimi = tuoteNimi;
+    }
+
+    public Tyyppi getTyyppi() {
         return this.tyyppi;
     }
 
-    public void setTyyppi(String tyyppi) {
+    public void setTyyppi(Tyyppi tyyppi) {
         this.tyyppi = tyyppi;
     }
 
@@ -54,11 +64,11 @@ public class Tuote {
         this.vari = vari;
     }
 
-    public String getKoko() {
+    public Koko getKoko() {
         return this.koko;
     }
 
-    public void setKoko(String koko) {
+    public void setKoko(Koko koko) {
         this.koko = koko;
     }
 
