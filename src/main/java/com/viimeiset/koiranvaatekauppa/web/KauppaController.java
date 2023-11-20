@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
-import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
-
 import jakarta.validation.Valid;
 
 import com.viimeiset.koiranvaatekauppa.domain.TuoteService;
+import com.viimeiset.koiranvaatekauppa.domain.ValmistajaService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.viimeiset.koiranvaatekauppa.domain.Tuote;
+import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
 import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
+import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import com.viimeiset.koiranvaatekauppa.domain.SignupForm;
 
@@ -29,14 +30,17 @@ public class KauppaController {
 	private final TuoteRepository repository;
 	private final ValmistajaRepository valmistajaRepository;
 
-	@Autowired
-	public KauppaController(TuoteRepository repository, ValmistajaRepository valmistajaRepository) {
-		this.repository = repository;
-		this.valmistajaRepository = valmistajaRepository;
-	}
+	private final TuoteService tuoteService;
+	private final ValmistajaService valmistajaService;
 
 	@Autowired
-	private TuoteService tuoteService;
+	public KauppaController(TuoteRepository repository, ValmistajaRepository valmistajaRepository,
+			TuoteService tuoteService, ValmistajaService valmistajaService) {
+		this.repository = repository;
+		this.valmistajaRepository = valmistajaRepository;
+		this.tuoteService = tuoteService;
+		this.valmistajaService = valmistajaService;
+	}
 
 	@RequestMapping(value = "/login")
 	public String login() {
@@ -66,6 +70,13 @@ public class KauppaController {
 	public String valmistajaLista(Model model) {
 		model.addAttribute("valmistajat", valmistajaRepository.findAll());
 		return "valmistajalista";
+	}
+
+	@GetMapping(value = "/tuotelista/{id}")
+	public String valmistajanTuotteet(@PathVariable Long id, Model model) {
+		System.out.println(valmistajaService.findTuotteetByValmistajaId(id));
+		model.addAttribute("tuotteet", valmistajaService.findTuotteetByValmistajaId(id));
+		return "valmistajantuotteet";
 	}
 
 	@GetMapping(value = "/lisaa")
