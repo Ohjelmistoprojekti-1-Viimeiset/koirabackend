@@ -12,12 +12,45 @@ public class SignupForm {
 	    @Size(min=7, max=30)
 	    private String password = "";
 
-	    @NotEmpty
+	    @NotEmpty(message = " ")
 	    @Size(min=7, max=30)
 	    private String passwordCheck = "";
 
 	    @NotEmpty
 	    private String role = "USER";
+	    
+	    @NotEmpty(message = "Etunimi ei voi olla tyhjä")
+	    private String etunimi= " ";
+	    
+	    @NotEmpty(message = "Sukunimi ei voi olla tyhjä")
+	    private String sukunimi= " ";
+	    
+	    @NotEmpty(message = "Sähköposti ei voi olla tyhjä")
+	    private String sahkoposti= " ";
+
+		public String getSahkoposti() {
+			return sahkoposti;
+		}
+
+		public void setSahkoposti(String sahkoposti) {
+			this.sahkoposti = sahkoposti;
+		}
+
+		public String getEtunimi() {
+			return etunimi;
+		}
+
+		public void setEtunimi(String etunimi) {
+			this.etunimi = etunimi;
+		}
+
+		public String getSukunimi() {
+			return sukunimi;
+		}
+
+		public void setSukunimi(String sukunimi) {
+			this.sukunimi = sukunimi;
+		}
 
 		public String getUsername() {
 			return username;

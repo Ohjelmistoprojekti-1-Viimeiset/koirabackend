@@ -48,6 +48,10 @@ public class UserController {
 		    	newUser.setPasswordHash(hashPwd);
 		    	newUser.setUsername(signupForm.getUsername());
 		    	newUser.setRole("USER");
+		    	newUser.setEtunimi(signupForm.getEtunimi());
+		    	newUser.setSukunimi(signupForm.getSukunimi());
+		    	newUser.setSahkoposti(signupForm.getSahkoposti());
+		    	
 		    	if (repository.findByUsername(signupForm.getUsername()) == null) {
 		    		repository.save(newUser);
 		    	}

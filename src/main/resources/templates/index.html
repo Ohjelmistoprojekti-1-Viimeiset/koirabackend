@@ -25,5 +25,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 		<input type="submit" value="Kirjaudu ulos" />
 	</form>
 	</div>
+	<div class="btn-group">
+        <a
+         th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+         th:href="@{/signup}">Lisää asiakas</a>
+    </div>
   </body>
 </html>

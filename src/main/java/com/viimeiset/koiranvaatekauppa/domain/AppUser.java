@@ -20,14 +20,24 @@ public class AppUser {
     @Column(name = "role", nullable = false)
     private String role;
     
-    public AppUser() {
+    private String etunimi;
+    
+    private String sukunimi;
+    
+    private String sahkoposti;
+    
+
+	public AppUser() {
     }
 
-	public AppUser(String username, String passwordHash, String role) {
+	public AppUser(String username, String passwordHash, String role, String etunimi, String sukunimi, String sahkoposti) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
 		this.role = role;
+		this.etunimi = etunimi;
+		this.sukunimi = sukunimi;
+		this.sahkoposti = sahkoposti;
 	}
 
 	public Long getId() {
@@ -60,6 +70,30 @@ public class AppUser {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public String getEtunimi() {
+		return etunimi;
+	}
+
+	public void setEtunimi(String etunimi) {
+		this.etunimi = etunimi;
+	}
+
+	public String getSukunimi() {
+		return sukunimi;
+	}
+
+	public void setSukunimi(String sukunimi) {
+		this.sukunimi = sukunimi;
+	}
+
+	public String getSahkoposti() {
+		return sahkoposti;
+	}
+
+	public void setSahkoposti(String sahkoposti) {
+		this.sahkoposti = sahkoposti;
 	}
 
 }

@@ -9,6 +9,8 @@ import com.viimeiset.koiranvaatekauppa.domain.Tuote;
 import com.viimeiset.koiranvaatekauppa.domain.TuoteRepository;
 import com.viimeiset.koiranvaatekauppa.domain.Valmistaja;
 import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
+import com.viimeiset.koiranvaatekauppa.domain.AppUser;
+import com.viimeiset.koiranvaatekauppa.domain.AppUserRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -21,6 +23,18 @@ public class RestTuoteController {
 	// injektoi ValmistajaRepossitoryn
 	@Autowired
 	ValmistajaRepository valmistajaRepository;
+	
+	// injektoi KäyttäjäRepossitoryn
+	@Autowired
+	AppUserRepository AppUserRepository;
+	
+	
+	//Tämä rest metodi on toistaiseksi vain manuaalitestausta varten.
+	@GetMapping("/kayttajat")
+
+	public Iterable<AppUser> getKayttajat() {
+		return AppUserRepository.findAll();
+	}
 
 	// GET pyyntö jolla haetaan tietokannasta kaikki tuotteet
 	@GetMapping("/tuotteet")
