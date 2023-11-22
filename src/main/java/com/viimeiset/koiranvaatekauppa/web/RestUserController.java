@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.viimeiset.koiranvaatekauppa.domain.AppUser;
 import com.viimeiset.koiranvaatekauppa.domain.AppUserRepository;
@@ -26,7 +27,7 @@ public class RestUserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<AppUser> luoKayttaja(AppUser user) {
+	public ResponseEntity<AppUser> luoKayttaja(@RequestBody AppUser user) {
 		userRepository.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
