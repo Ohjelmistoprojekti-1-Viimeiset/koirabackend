@@ -2,35 +2,34 @@ package com.viimeiset.koiranvaatekauppa.domain;
 
 import jakarta.persistence.*;
 
-
 @Entity
 public class AppUser {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	private Long id;
 
-    @Column(name = "password", nullable = false)
-    private String passwordHash;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
-    @Column(name = "role", nullable = false)
-    private String role;
-    
-    private String etunimi;
-    
-    private String sukunimi;
-    
-    private String sahkoposti;
-    
+	@Column(name = "password", nullable = false)
+	private String passwordHash;
+
+	@Column(name = "role", nullable = false)
+	private String role;
+
+	private String etunimi;
+
+	private String sukunimi;
+
+	private String sahkoposti;
 
 	public AppUser() {
-    }
+	}
 
-	public AppUser(String username, String passwordHash, String role, String etunimi, String sukunimi, String sahkoposti) {
+	public AppUser(String username, String passwordHash, String role, String etunimi, String sukunimi,
+			String sahkoposti) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
@@ -71,7 +70,7 @@ public class AppUser {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public String getEtunimi() {
 		return etunimi;
 	}
