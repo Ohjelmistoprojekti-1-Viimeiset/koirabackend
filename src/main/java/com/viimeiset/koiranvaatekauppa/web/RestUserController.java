@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.viimeiset.koiranvaatekauppa.domain.AppUser;
 import com.viimeiset.koiranvaatekauppa.domain.AppUserRepository;
@@ -18,6 +19,7 @@ public class RestUserController {
 
 	@Autowired
 	AppUserRepository userRepository;
+	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 
 	// Tämä rest metodi on toistaiseksi vain manuaalitestausta varten.
 
@@ -28,7 +30,16 @@ public class RestUserController {
 
 	@PostMapping
 	public ResponseEntity<AppUser> luoKayttaja(@RequestBody AppUser user) {
-		userRepository.save(user);
+		String kryptattuSalasana = bc.encode(user.getPasswordHash());
+	    user.setPasswordHash(kryptattuSalasana);
+	    AppUser newUser = new AppUser();
+    	newUser.setUsername(user.getUsername());
+    	newUser.setPasswordHash(user.getPasswordHash());
+    	newUser.setRole("USER");
+    	newUser.setEtunimi(user.getEtunimi());
+    	newUser.setSukunimi(user.getSukunimi());
+    	newUser.setSahkoposti(user.getSahkoposti());
+		userRepository.save(newUser);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 

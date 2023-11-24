@@ -17,7 +17,7 @@ public class SignupForm {
 	    private String passwordCheck = "";
 
 	    @NotEmpty
-	    private String role = "USER";
+	    private String role = " ";
 	    
 	    @NotEmpty(message = "Etunimi ei voi olla tyhjä")
 	    private String etunimi= " ";

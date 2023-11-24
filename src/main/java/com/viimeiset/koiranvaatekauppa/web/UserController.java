@@ -47,7 +47,7 @@ public class UserController {
 		    	AppUser newUser = new AppUser();
 		    	newUser.setPasswordHash(hashPwd);
 		    	newUser.setUsername(signupForm.getUsername());
-		    	newUser.setRole("USER");
+		    	newUser.setRole(signupForm.getRole());
 		    	newUser.setEtunimi(signupForm.getEtunimi());
 		    	newUser.setSukunimi(signupForm.getSukunimi());
 		    	newUser.setSahkoposti(signupForm.getSahkoposti());

@@ -24,13 +24,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 			</div>
 			
 			<div>
-				<label> Etunimi :<input type="text" th:field="*{etunimi}" class="form-control"/></label>
+				<label>Role :</label>
+				<select id="role" name="role" required>
+        <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+        <option value="ROLE_USER">ROLE_USER</option>
+        <option value="USER">USER</option></select>
+				<p th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Error!</p>	
+			</div>
+			
+			<div>
+				<label> First Name :<input type="text" th:field="*{etunimi}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}">Etunimi vaaditaan</p>	
 			</div>
 			
 			
 			<div>
-				<label> Sukunimi :<input type="text" th:field="*{sukunimi}" class="form-control"/></label>
+				<label> Last Name :<input type="text" th:field="*{sukunimi}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}">Sukunimi vaaditaan</p>	
 			</div>
 			
