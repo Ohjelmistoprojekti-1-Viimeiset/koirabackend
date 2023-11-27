@@ -23,23 +23,26 @@ import com.viimeiset.koiranvaatekauppa.domain.ValmistajaRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import com.viimeiset.koiranvaatekauppa.domain.SignupForm;
+import com.viimeiset.koiranvaatekauppa.domain.*;
 
 @Controller
 public class KauppaController {
 
 	private final TuoteRepository repository;
 	private final ValmistajaRepository valmistajaRepository;
+	private final AppUserRepository appuserrepository;
 
 	private final TuoteService tuoteService;
 	private final ValmistajaService valmistajaService;
 
 	@Autowired
 	public KauppaController(TuoteRepository repository, ValmistajaRepository valmistajaRepository,
-			TuoteService tuoteService, ValmistajaService valmistajaService) {
+			TuoteService tuoteService, ValmistajaService valmistajaService, AppUserRepository appuserrepository) {
 		this.repository = repository;
 		this.valmistajaRepository = valmistajaRepository;
 		this.tuoteService = tuoteService;
 		this.valmistajaService = valmistajaService;
+		this.appuserrepository = appuserrepository;
 	}
 
 	@RequestMapping(value = "/login")
@@ -58,6 +61,12 @@ public class KauppaController {
 	@GetMapping(value = { "/index" })
 	public String index() {
 		return "index";
+	}
+	
+	@GetMapping(value = { "/asiakaslista" })
+	public String asiakasLista(Model model) {
+		model.addAttribute("asiakkaat", appuserrepository.findAll());
+		return "asiakaslista";
 	}
 
 	@GetMapping(value = { "/tuotelista" })
