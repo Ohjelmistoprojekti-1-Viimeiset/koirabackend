@@ -15,12 +15,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <th>Etunimi</th>
         <th>Sukunimi</th>
         <th>Sähköposti</th>
+        <th></th>
       </tr>
 
       <tr th:each="appuser : ${asiakkaat}">
         <td th:text="${appuser.etunimi}"></td>
         <td th:text="${appuser.sukunimi}"></td>
         <td th:text="${appuser.sahkoposti}"></td>
+        <td>
+        <a th:href="@{'/muokkaaasiakasta/' + ${appuser.id}}">
+        Muokkaa</a>
+        </td>
       </tr>
     </table>
 

@@ -62,10 +62,10 @@ public class KauppaController {
 	public String index() {
 		return "index";
 	}
-
+	
 	@GetMapping(value = { "/asiakaslista" })
 	public String asiakasLista(Model model) {
-		model.addAttribute("asiakkaat", appuserrepository.findAll());
+		model.addAttribute("asiakkaat", appuserrepository.findByRole("USER"));
 		return "asiakaslista";
 	}
 
@@ -137,7 +137,6 @@ public class KauppaController {
 		existingTuote.setVari(tuote.getVari());
 		existingTuote.setKoko(tuote.getKoko());
 		existingTuote.setHinta(tuote.getHinta());
-		existingTuote.setMaara(tuote.getMaara());
 
 		Valmistaja valmistaja = valmistajaRepository.findByNimi(tuote.getValmistaja().getNimi());
 		if (valmistaja == null) {

@@ -52,8 +52,11 @@ public class KoiranvaatekauppaApplication {
 					"ROLE_USER", null, null, null);
 			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C",
 					"ROLE_ADMIN", null, null, null);
+			AppUser asiakas = new AppUser("asiakas", "$2y$10$byFwZxRhpVtCUs2abOdwdeAw8vwgsqNmRMqVzPZu/0P/i7rrB9Cba",
+					"USER", "Aasi", "Asiakas", "Asiakas@asiakas.com");
 			uRepository.save(user1);
 			uRepository.save(user2);
+			uRepository.save(asiakas);
 
 			log.info("Lisätään kaikki data.");
 			for (Tuote tuote : tuoteRepository.findAll()) {
