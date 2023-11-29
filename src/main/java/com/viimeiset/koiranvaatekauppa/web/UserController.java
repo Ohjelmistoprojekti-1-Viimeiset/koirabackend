@@ -107,4 +107,10 @@ public class UserController {
             return "asiakaslista";
         }
     }
+    
+    @PostMapping("/poistaasiakas/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
+    	repository.delete(repository.findById(userId).get());
+    	return "redirect:/asiakaslista";
+    }
 }
