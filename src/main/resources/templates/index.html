@@ -14,7 +14,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <form action="/valmistajalista" method="get">
       <button type="submit">Valmistajalista</button>
     </form>
-    
+     <form action="/asiakaslista" method="get">
+      <button type="submit">Asiakaslista</button>
+    </form>
 <div sec:authorize="!isAuthenticated()">
     <a href="http://localhost:8080/login">
 		<button>Kirjaudu sisään</button>
