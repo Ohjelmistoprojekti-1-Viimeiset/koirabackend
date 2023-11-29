@@ -18,6 +18,7 @@ public class Tuote {
     private String vari;
     private Koko koko;
     private double hinta;
+    private Integer maara;
 
     @ManyToOne
     @JoinColumn(name = "valmistaja_id")
@@ -27,13 +28,15 @@ public class Tuote {
 
     }
 
-    public Tuote(String tuoteNimi, Tyyppi tyyppi, String vari, Koko koko, double hinta, Valmistaja valmistaja) {
+    public Tuote(String tuoteNimi, Tyyppi tyyppi, String vari, Koko koko, double hinta, Valmistaja valmistaja,
+            Integer maara) {
         this.tuoteNimi = tuoteNimi;
         this.tyyppi = tyyppi;
         this.vari = vari;
         this.koko = koko;
         this.hinta = hinta;
         this.valmistaja = valmistaja;
+        this.maara = maara;
     }
 
     public Long getId() {
@@ -86,6 +89,14 @@ public class Tuote {
 
     public void setValmistaja(Valmistaja valmistaja) {
         this.valmistaja = valmistaja;
+    }
+
+    public Integer getMaara() {
+        return this.maara;
+    }
+
+    public void setMaara(Integer maara) {
+        this.maara = maara;
     }
 
 }

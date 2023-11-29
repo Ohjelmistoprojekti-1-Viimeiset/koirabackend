@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
     <title>Koiranvaatekauppa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -30,6 +32,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <th>Koko</th>
         <th>Hinta</th>
         <th>Valmistaja</th>
+        <th>Määrä</th>
       </tr>
 
       <tr th:each="tuote : ${tuotteet}">
@@ -41,6 +44,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <td
           th:text="${tuote.valmistaja != null ? tuote.valmistaja.nimi : 'N/A'}"
         ></td>
+        <td th:text="${tuote.maara}"></td>
         <td>
           <a
             th:if="${#authorization.expression('hasRole(''ADMIN'')')}"

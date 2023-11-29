@@ -39,17 +39,17 @@ public class KoiranvaatekauppaApplication {
 			Valmistaja valmistaja3 = new Valmistaja("Puma");
 			valmistajaRepository.saveAll(Arrays.asList(valmistaja1, valmistaja2, valmistaja3));
 
-			Tuote tuote1 = new Tuote("Takki", Tyyppi.VAATE, "Musta", Koko.M, 29.99, valmistaja1);
-			Tuote tuote2 = new Tuote("Rukkanen", Tyyppi.VAATE, "Sininen", Koko.L, 59.99, valmistaja2);
-			Tuote tuote3 = new Tuote("Koiranruoka", Tyyppi.RUOKA, "Punainen", Koko.S, 14.99, valmistaja3);
-			Tuote tuote4 = new Tuote("Koiralelu", Tyyppi.LELU, "Punainen", Koko.L, 39.99, valmistaja1);
-			Tuote tuote5 = new Tuote("Hattu", Tyyppi.VAATE, "Vihreä", Koko.S, 89.99, valmistaja2);
-			Tuote tuote6 = new Tuote("Pipo", Tyyppi.VAATE, "Musta", Koko.S, 9.99, valmistaja3);
+			Tuote tuote1 = new Tuote("Takki", Tyyppi.VAATE, "Musta", Koko.M, 29.99, valmistaja1, 10);
+			Tuote tuote2 = new Tuote("Rukkanen", Tyyppi.VAATE, "Sininen", Koko.L, 59.99, valmistaja2, 2);
+			Tuote tuote3 = new Tuote("Koiranruoka", Tyyppi.RUOKA, "Punainen", Koko.S, 14.99, valmistaja3, 20);
+			Tuote tuote4 = new Tuote("Koiralelu", Tyyppi.LELU, "Punainen", Koko.L, 39.99, valmistaja1, 3);
+			Tuote tuote5 = new Tuote("Hattu", Tyyppi.VAATE, "Vihreä", Koko.S, 89.99, valmistaja2, 10);
+			Tuote tuote6 = new Tuote("Pipo", Tyyppi.VAATE, "Musta", Koko.S, 9.99, valmistaja3, 100);
 			tuoteRepository.saveAll(Arrays.asList(tuote1, tuote2, tuote3, tuote4, tuote5,
 					tuote6));
 
 			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6",
-					"ROLE_USER",null, null, null);
+					"ROLE_USER", null, null, null);
 			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C",
 					"ROLE_ADMIN", null, null, null);
 			uRepository.save(user1);
