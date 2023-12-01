@@ -45,7 +45,7 @@ public class RestUserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{userId}")
 	public ResponseEntity<Void> poistaKayttaja(@PathVariable Long userId) {
 		AppUser user = userRepository.findById(userId).get();
 		userRepository.delete(user);
