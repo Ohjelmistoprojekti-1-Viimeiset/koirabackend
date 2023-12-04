@@ -62,6 +62,8 @@ public class WebSecurityConfig {
                 .requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/delete/{id}")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/deleteValmistaja/{id}")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/poistaasiakas/{userId}")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/muokkaaasiakasta/{userId}")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/api/**")).permitAll()
                 .anyRequest().authenticated()
             )

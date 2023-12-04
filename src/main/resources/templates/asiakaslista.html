@@ -24,11 +24,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <td th:text="${appuser.sukunimi}"></td>
         <td th:text="${appuser.sahkoposti}"></td>
         <td>
-        <a th:href="@{'/muokkaaasiakasta/' + ${appuser.id}}">
+        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{'/muokkaaasiakasta/' + ${appuser.id}}">
         Muokkaa</a>
         </td>
        <td>
-          <form th:action="@{/poistaasiakas/{id}(id=${appuser.id})}" method="post">
+          <form th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:action="@{/poistaasiakas/{id}(id=${appuser.id})}" method="post">
 						<button type="submit" class="btn btn-danger">Poista</button>
 			</form>
         </td>
