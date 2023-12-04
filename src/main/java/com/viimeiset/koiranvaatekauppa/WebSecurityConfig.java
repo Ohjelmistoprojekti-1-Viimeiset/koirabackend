@@ -52,11 +52,13 @@ public class WebSecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(antMatcher("/css/**")).permitAll()
-                .requestMatchers(antMatcher("/signup")).permitAll()
-                .requestMatchers(antMatcher("/saveuser")).permitAll()
-                .requestMatchers(antMatcher("/tuotelista")).permitAll()
-                .requestMatchers(antMatcher("/valmistajalista")).permitAll()
-                .requestMatchers(antMatcher("/index")).permitAll()
+                .requestMatchers(antMatcher("/")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/signup")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/saveuser")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/tuotelista")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/valmistajalista")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/asiakaslista")).hasRole("ADMIN")
+                .requestMatchers(antMatcher("/index")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/h2-console/**")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/lisaa/**")).hasRole("ADMIN")
                 .requestMatchers(antMatcher("/muokkaa/**")).hasRole("ADMIN")
@@ -74,7 +76,7 @@ public class WebSecurityConfig {
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutSuccessUrl("/index")
+                .logoutSuccessUrl("/login")
                 .permitAll()
             )
             .csrf(csrf -> csrf.disable());
