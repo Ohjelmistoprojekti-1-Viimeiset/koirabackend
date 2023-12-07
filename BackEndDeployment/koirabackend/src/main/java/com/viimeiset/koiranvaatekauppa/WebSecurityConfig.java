@@ -30,7 +30,7 @@ public class WebSecurityConfig {
 	//cors-säännöt päivitetty
 	//kaikki uudelleenohjaukset päivitetty vastaamaan serverlinkkejä
 	//SSL-konfiguraatio -> application.properties
-	//SSL-avaimet SHA-512, PKCS12, springboot.p12
+	//SSL-avaimet SHA-384 RSA, PKCS12, springboot.p12
 	//HTTPS-säännöt lisätty
 	
 
