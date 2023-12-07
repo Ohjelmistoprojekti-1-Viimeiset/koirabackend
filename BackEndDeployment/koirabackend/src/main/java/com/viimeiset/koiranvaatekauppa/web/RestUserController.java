@@ -23,7 +23,6 @@ public class RestUserController {
 	AppUserRepository userRepository;
 	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 
-	// Tämä rest metodi on toistaiseksi vain manuaalitestausta varten.
 
 	@GetMapping
 	public Iterable<AppUser> getKayttajat() {
@@ -45,11 +44,16 @@ public class RestUserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 	
-	@DeleteMapping("/{userId}")
-	public ResponseEntity<Void> poistaKayttaja(@PathVariable Long userId) {
-		AppUser user = userRepository.findById(userId).get();
-		userRepository.delete(user);
-		return ResponseEntity.noContent().build();
+	@DeleteMapping("/{username}")
+	public ResponseEntity<Void> poistaKayttaja(@PathVariable String username) {
+	    AppUser user = userRepository.findByUsername(username);
+
+	    if (user != null) {
+	        userRepository.delete(user);
+	        return ResponseEntity.noContent().build();
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
+	}
 		
 	}
-}

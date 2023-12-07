@@ -27,7 +27,12 @@ import java.util.Set;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
-	//
+	//cors-säännöt päivitetty
+	//kaikki uudelleenohjaukset päivitetty vastaamaan serverlinkkejä
+	//SSL-konfiguraatio -> application.properties
+	//SSL-avaimet SHA-512, PKCS12, springboot.p12
+	//HTTPS-säännöt lisätty
+	
 
     @Autowired
     private UserDetailServiceImpl userDetailsService;
@@ -35,7 +40,7 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://jaakkosai.github.io"));//sallittu domain
+        configuration.setAllowedOrigins(Arrays.asList("https://ohjelmistoprojekti-1-viimeiset.github.io", "http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
@@ -47,7 +52,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.requiresChannel(channel ->
-                channel.anyRequest().requiresSecure()) //kaikki pyynnöt ja endpointit https
+                channel.anyRequest().requiresSecure())
             .authorizeHttpRequests(authorize ->
                 authorize
                     .requestMatchers("/css/**").permitAll()
@@ -101,7 +106,7 @@ public class WebSecurityConfig {
             ) throws IOException, ServletException {
                 Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
                 if (roles.contains("USER")) {
-                    response.sendRedirect("https://jaakkosai.github.io/koirafrontend_deploy/");//pävitetty redirect
+                    response.sendRedirect("https://ohjelmistoprojekti-1-viimeiset.github.io/koirafrontend/");
                 } else {
                     super.onAuthenticationSuccess(request, response, authentication);
                 }
